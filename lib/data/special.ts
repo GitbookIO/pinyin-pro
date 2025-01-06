@@ -5,7 +5,7 @@ import {
   getNumOfTone,
   getPinyinWithoutTone,
 } from '@/core/pinyin/handle';
-import DICT1 from './dict1';
+import { getDict1 } from './dict1';
 import { stringLength } from '@/common/utils';
 
 export const InitialList = [
@@ -228,7 +228,7 @@ export function processToneSandhi(cur: string, pre: string, next: string) {
 
 // 处理「了」字的变调
 export function processToneSandhiLiao(cur: string, pre: string) {
-  if (cur === '了' && (!pre || !DICT1.get(pre))) {
+  if (cur === '了' && (!pre || !getDict1().get(pre))) {
     return 'liǎo';
   }
 }
@@ -236,10 +236,10 @@ export function processToneSandhiLiao(cur: string, pre: string) {
 // 处理叠字符[々]
 function processReduplicationChar(cur: string, pre: string) {
   if (cur === '々') {
-    if (!pre || !DICT1.get(pre)) {
+    if (!pre || !getDict1().get(pre)) {
       return 'tóng';
     } else {
-      return DICT1.get(pre).split(' ')[0];
+      return getDict1().get(pre).split(' ')[0];
     }
   }
 }

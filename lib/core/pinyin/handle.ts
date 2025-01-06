@@ -7,7 +7,7 @@ import {
   processSepecialPinyin,
 } from "@/data/special";
 import Surnames from "@/data/surname";
-import DICT1 from "@/data/dict1";
+import { getDict1 } from "@/data/dict1";
 import { getCustomMultpileDict } from "@/core/custom";
 import { SingleWordResult } from "../../common/type";
 import type { SurnameMode } from "../../common/type";
@@ -22,7 +22,7 @@ import { splitString } from "@/common/utils";
  */
 type GetSingleWordPinyin = (char: string) => string;
 export const getSingleWordPinyin: GetSingleWordPinyin = (char) => {
-  const pinyin = DICT1.get(char);
+  const pinyin = getDict1().get(char);
   // 若查到, 则返回第一个拼音; 若未查到, 返回原字符
   return pinyin ? pinyin.split(" ")[0] : char;
 };
@@ -110,7 +110,8 @@ const getPinyinWithoutTone: GetPinyinWithoutTone = (pinyin) => {
 type GetAllPinyin = (char: string, surname?: SurnameMode) => string[];
 export const getAllPinyin: GetAllPinyin = (char, surname = "off") => {
   const customMultpileDict = getCustomMultpileDict();
-  let pinyin = DICT1.get(char) ? DICT1.get(char).split(" ") : [];
+  const charPinyin = getDict1().get(char);
+  let pinyin = charPinyin ? charPinyin.split(" ") : [];
   if (customMultpileDict.get(char)) {
     pinyin = customMultpileDict.get(char).split(" ");
   } else if (surname !== "off") {

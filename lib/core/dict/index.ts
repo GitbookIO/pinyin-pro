@@ -1,7 +1,7 @@
 import { Priority, Probability } from "@/common/constant";
 import { Pattern, getACTree } from "@/common/segmentit";
 import { stringLength } from "@/common/utils";
-import DICT1 from "@/data/dict1";
+import { getDict1 } from "@/data/dict1";
 
 const DefaultName = Symbol("default");
 
@@ -81,24 +81,24 @@ function addToOriginDict(
   }
   const originDict = originDictMap.get(dict)!;
   if (!originDict[char]) {
-    originDict[char] = DICT1.get(char) as string;
+    originDict[char] = getDict1().get(char) as string;
   }
   if (handle === "add") {
-    const existedPinyin = DICT1.get(char);
+    const existedPinyin = getDict1().get(char);
     if (existedPinyin && !existedPinyin.split(' ').includes(pinyin)) {
-      DICT1.set(char, `${existedPinyin} ${pinyin}`);
-    } else if (!DICT1.get(char)) {
-      DICT1.set(char, pinyin);
+      getDict1().set(char, `${existedPinyin} ${pinyin}`);
+    } else if (!getDict1().get(char)) {
+      getDict1().set(char, pinyin);
     }
   } else if (handle === "replace") {
-    DICT1.set(char, pinyin);
+    getDict1().set(char, pinyin);
   }
 }
 
 function removeOriginDict(dict: string | Symbol) {
   const originDict = originDictMap.get(dict) || {};
   for (let char in originDict) {
-    DICT1.set(char, originDict[char]);
+    getDict1().set(char, originDict[char]);
     delete originDict[char];
   }
 }

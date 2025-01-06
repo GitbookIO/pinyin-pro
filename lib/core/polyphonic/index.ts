@@ -6,7 +6,7 @@ import {
   middlewareToneType,
   middlewareV,
 } from '@/core/pinyin/middlewares';
-import DICT1 from '@/data/dict1';
+import { getDict1 } from '@/data/dict1';
 import {
   getNumOfTone,
   getInitialAndFinal,
@@ -205,7 +205,7 @@ function polyphonic(
 const getPolyphonicList = (text: string): SingleWordResult[] => {
   return splitString(text).map((char) => {
     const customPolyphonicDict = getCustomPolyphonicDict();
-    const pinyin = customPolyphonicDict.get(char) || DICT1.get(char) || char;
+    const pinyin = customPolyphonicDict.get(char) || getDict1().get(char) || char;
     return {
       origin: char,
       result: pinyin,
@@ -255,7 +255,7 @@ export const handleType = (
         finalTail: tail,
         num: Number(getNumOfTone(item.originPinyin)),
         isZh: item.isZh,
-        inZhRange: !!DICT1.get(item.origin),
+        inZhRange: !!getDict1().get(item.origin),
       };
     });
   }
