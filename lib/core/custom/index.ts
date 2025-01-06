@@ -1,4 +1,4 @@
-import { acTree } from '@/common/segmentit';
+import { getACTree } from '@/common/segmentit';
 import { Probability, Priority } from '@/common/constant';
 import { splitString, stringLength } from '@/common/utils';
 import { FastDictFactory } from '../../common/utils';
@@ -47,7 +47,7 @@ export function customPinyin(
     priority: Priority.Custom,
     dict: CustomDictName,
   }));
-  acTree.build(customPatterns);
+  getACTree().build(customPatterns);
   // add words for multiple and polyphonic
   if (options?.multiple) {
     addCustomConfigToDict(config, customMultipleDict, options.multiple);
@@ -93,7 +93,7 @@ export function clearCustomDict(dict: CustomDictType | CustomDictType[]) {
     Object.keys(customDict).forEach(function (word) {
       delete customDict[word];
     });
-    acTree.removeDict(CustomDictName);
+    getACTree().removeDict(CustomDictName);
   }
   if (dict === 'multiple' || dict.indexOf('multiple') !== -1) {
     customMultipleDict.clear();
