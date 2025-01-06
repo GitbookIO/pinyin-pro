@@ -228,14 +228,27 @@ export class AC {
   }
 }
 
-// 常规匹配
-export const PatternsNormal = [
-  ...Pattern5,
-  ...Pattern4,
-  ...Pattern3,
-  ...Pattern2,
-  ...PatternNumberDict,
-  ...PatternSurname,
-];
-export const acTree = new AC();
-acTree.build(PatternsNormal);
+
+let patternsNormal: Pattern[] | undefined;
+let acTree: AC | undefined;
+
+export function getACTree(): AC {
+  if (!patternsNormal) {
+    // 常规匹配
+    patternsNormal = [
+      ...Pattern5,
+      ...Pattern4,
+      ...Pattern3,
+      ...Pattern2,
+      ...PatternNumberDict,
+      ...PatternSurname,
+    ];
+  }
+
+  if (!acTree) {
+    acTree = new AC();
+    acTree.build(patternsNormal);
+  }
+
+  return acTree;
+}

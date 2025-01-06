@@ -29,6 +29,5 @@ export declare class AC {
     filterWithMaxProbability(patterns: MatchPattern[], isSurname?: boolean): MatchPattern[];
     filter(patterns: MatchPattern[], isSurname?: boolean): MatchPattern[];
 }
-export declare const PatternsNormal: Pattern[];
-export declare const acTree: AC;
+export declare function getACTree(): AC;
 export {};
