@@ -162,8 +162,9 @@ function genNumberDict() {
 
   return dict;
 }
-const NumberDict = genNumberDict();
+
 export function fillPatternNumberDict(arr: Pattern[]): void {
+  const NumberDict = genNumberDict();
   Object.keys(NumberDict).forEach((key) => {
     arr.push({
       zh: key,
