@@ -1,6 +1,6 @@
 {
   "name": "@gitbook/pinyin-pro",
-  "version": "3.25.0-gitbook3",
+  "version": "3.26.0-gitbook4",
   "description": "GitBook's fork of pinyin-pro, a fantastic open-source package for turning Chinese characters to pinyin.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
