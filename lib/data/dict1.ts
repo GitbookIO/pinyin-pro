@@ -18662,14 +18662,22 @@ const map: { [key: string]: string[] } = {
   'yáo xiào': ['滧'],
 };
 
-const DICT1 = new FastDictFactory();
+let DICT1: FastDictFactory | undefined = undefined;
 
-Object.keys(map).forEach((key) => {
-  const chars = map[key];
-  for (let char of chars) {
-    DICT1.set(char, key);
+export function getDict1(): FastDictFactory {
+  if (!DICT1) {
+    const dict = new FastDictFactory();
+    Object.keys(map).forEach((key) => {
+      const chars = map[key];
+      for (let char of chars) {
+        dict.set(char, key);
+      }
+    });
+    DICT1 = dict;
   }
-});
+
+  return DICT1;
+}
 
 export default DICT1;
 

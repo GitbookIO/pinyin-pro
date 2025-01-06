@@ -2,7 +2,7 @@ import { getACTree } from '@/common/segmentit';
 import { Probability, Priority } from '@/common/constant';
 import { splitString, stringLength } from '@/common/utils';
 import { FastDictFactory } from '../../common/utils';
-import DICT1 from '@/data/dict1';
+import { getDict1 } from '@/data/dict1';
 let customDict: { [key: string]: string } = {};
 const customMultipleDict = new FastDictFactory();
 const customPolyphonicDict = new FastDictFactory();
@@ -66,12 +66,12 @@ function addCustomConfigToDict(
     const pinyins = config[word];
     splitString(word).forEach((char, index) => {
       const pinyin = pinyins.split(' ')[index] || '';
-      if (handleType === 'replace' || (handleType === 'add' && !dict.get(char) && !DICT1.get(char))) {
+      if (handleType === 'replace' || (handleType === 'add' && !dict.get(char) && !getDict1().get(char))) {
         // 直接覆盖原词典
         dict.set(char, pinyin);
       } else {
         // 补充至原词典
-        dict.set(char, dict.get(char) || DICT1.get(char));
+        dict.set(char, dict.get(char) || getDict1().get(char));
         if (!dict.get(char).split(' ').includes(pinyin)) {
           dict.set(char, `${dict.get(char)} ${pinyin}`.trim());
         }

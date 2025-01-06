@@ -10,7 +10,7 @@ import {
   getPinyinWithoutTone,
   getPinyinWithNum,
 } from "./handle";
-import DICT1 from "@/data/dict1";
+import { getDict1 } from "@/data/dict1";
 
 // 验证输入是否为字符串
 export const validateType = (word: unknown) => {
@@ -205,7 +205,7 @@ export const middlewareType = (
         num: Number(getNumOfTone(item.originPinyin)),
         isZh: item.isZh,
         polyphonic,
-        inZhRange: !!DICT1.get(item.origin),
+        inZhRange: !!getDict1().get(item.origin),
         result: item.result,
       };
     });

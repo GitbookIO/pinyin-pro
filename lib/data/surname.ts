@@ -498,11 +498,16 @@ const Surnames: { [key: string]: string } = {
 };
 
 export default Surnames;
-export const PatternSurname: Pattern[] = Object.keys(Surnames).map((key) => ({
-  zh: key,
-  pinyin: Surnames[key],
-  probability: Probability.Surname + stringLength(key),
-  length: stringLength(key),
-  priority: Priority.Surname,
-  dict: Symbol('surname'),
-}));
+export function fillPatternSurname(arr: Pattern[]): void {
+  Object.keys(Surnames).forEach((key) => {
+    const len = stringLength(key)
+    arr.push({
+      zh: key,
+      pinyin: Surnames[key],
+      probability: Probability.Surname + len,
+      length: len,
+      priority: Priority.Surname,
+      dict: Symbol('surname'),
+    });
+  });
+}

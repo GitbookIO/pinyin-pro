@@ -332,11 +332,15 @@ const DICT3: { [prop: string]: string } = {
   曲别针: 'qū bié zhēn',
 };
 export default DICT3;
-export const Pattern3: Pattern[] = Object.keys(DICT3).map((key) => ({
-  zh: key,
-  pinyin: DICT3[key],
-  probability: Probability.DICT,
-  length: 3,
-  priority: Priority.Normal,
-  dict: Symbol('dict3'),
-}));
+export function fillPattern3(arr: Pattern[]): void {
+  Object.keys(DICT3).forEach((key) => {
+    arr.push({
+      zh: key,
+      pinyin: DICT3[key],
+      probability: Probability.DICT,
+      length: 3,
+      priority: Priority.Normal,
+      dict: Symbol('dict3'),
+    });
+  });
+}

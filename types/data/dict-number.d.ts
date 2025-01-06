@@ -1,2 +1,2 @@
 import type { Pattern } from "../common/ac";
-export declare const PatternNumberDict: Pattern[];
+export declare function fillPattern2(arr: Pattern[]): void;

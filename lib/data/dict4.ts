@@ -1598,11 +1598,15 @@ const DICT4: { [prop: string]: string } = {
   行行不行: 'háng háng bù xíng'
 }
 export default DICT4;
-export const Pattern4: Pattern[] = Object.keys(DICT4).map((key) => ({
-  zh: key,
-  pinyin: DICT4[key],
-  probability: Probability.DICT,
-  length: 4,
-  priority: Priority.Normal,
-  dict: Symbol('dict4'),
-}));
+export function fillPattern4(arr: Pattern[]): void {
+  Object.keys(DICT4).forEach((key) => {
+    arr.push({
+      zh: key,
+      pinyin: DICT4[key],
+      probability: Probability.DICT,
+      length: 4,
+      priority: Priority.Normal,
+      dict: Symbol('dict4'),
+    });
+  });
+}

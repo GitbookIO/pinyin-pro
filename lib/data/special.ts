@@ -5,7 +5,7 @@ import {
   getNumOfTone,
   getPinyinWithoutTone,
 } from '@/core/pinyin/handle';
-import DICT1 from './dict1';
+import { getDict1 } from './dict1';
 import { stringLength } from '@/common/utils';
 
 export const InitialList = [
@@ -162,17 +162,20 @@ function genNumberDict() {
 
   return dict;
 }
-const NumberDict = genNumberDict();
-export const PatternNumberDict: Pattern[] = Object.keys(NumberDict).map(
-  (key) => ({
-    zh: key,
-    pinyin: NumberDict[key],
-    probability: Probability.Rule,
-    length: stringLength(key),
-    priority: Priority.Normal,
-    dict: Symbol('rule'),
-  })
-);
+
+export function fillPatternNumberDict(arr: Pattern[]): void {
+  const NumberDict = genNumberDict();
+  Object.keys(NumberDict).forEach((key) => {
+    arr.push({
+      zh: key,
+      pinyin: NumberDict[key],
+      probability: Probability.Rule,
+      length: stringLength(key),
+      priority: Priority.Normal,
+      dict: Symbol('rule'),
+    });
+  });
+}
 
 /**
  * @description: 连续变调处理：https://zh.wiktionary.org/wiki/Appendix:%E2%80%9C%E4%B8%80%E2%80%9D%E5%8F%8A%E2%80%9C%E4%B8%8D%E2%80%9D%E7%9A%84%E5%8F%98%E8%B0%83
@@ -226,7 +229,7 @@ export function processToneSandhi(cur: string, pre: string, next: string) {
 
 // 处理「了」字的变调
 export function processToneSandhiLiao(cur: string, pre: string) {
-  if (cur === '了' && (!pre || !DICT1.get(pre))) {
+  if (cur === '了' && (!pre || !getDict1().get(pre))) {
     return 'liǎo';
   }
 }
@@ -234,10 +237,10 @@ export function processToneSandhiLiao(cur: string, pre: string) {
 // 处理叠字符[々]
 function processReduplicationChar(cur: string, pre: string) {
   if (cur === '々') {
-    if (!pre || !DICT1.get(pre)) {
+    if (!pre || !getDict1().get(pre)) {
       return 'tóng';
     } else {
-      return DICT1.get(pre).split(' ')[0];
+      return getDict1().get(pre).split(' ')[0];
     }
   }
 }
