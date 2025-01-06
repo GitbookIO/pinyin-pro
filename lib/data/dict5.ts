@@ -18,11 +18,16 @@ const DICT5: { [prop: string]: string } = {
   竹筒倒豆子: 'zhú tǒng dào dòu zi',
 };
 export default DICT5;
-export const Pattern5: Pattern[] = Object.keys(DICT5).map((key) => ({
-  zh: key,
-  pinyin: DICT5[key],
-  probability: Probability.DICT,
-  length: 5,
-  priority: Priority.Normal,
-  dict: Symbol('dict5'),
-}));
+
+export function fillPattern5(arr: Pattern[]): void {
+  Object.keys(DICT5).forEach((key) => {
+    arr.push({
+      zh: key,
+      pinyin: DICT5[key],
+      probability: Probability.DICT,
+      length: 5,
+      priority: Priority.Normal,
+      dict: Symbol('dict5'),
+    });
+  });
+}

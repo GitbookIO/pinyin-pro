@@ -163,16 +163,18 @@ function genNumberDict() {
   return dict;
 }
 const NumberDict = genNumberDict();
-export const PatternNumberDict: Pattern[] = Object.keys(NumberDict).map(
-  (key) => ({
-    zh: key,
-    pinyin: NumberDict[key],
-    probability: Probability.Rule,
-    length: stringLength(key),
-    priority: Priority.Normal,
-    dict: Symbol('rule'),
-  })
-);
+export function fillPatternNumberDict(arr: Pattern[]): void {
+  Object.keys(NumberDict).forEach((key) => {
+    arr.push({
+      zh: key,
+      pinyin: NumberDict[key],
+      probability: Probability.Rule,
+      length: stringLength(key),
+      priority: Priority.Normal,
+      dict: Symbol('rule'),
+    });
+  });
+}
 
 /**
  * @description: 连续变调处理：https://zh.wiktionary.org/wiki/Appendix:%E2%80%9C%E4%B8%80%E2%80%9D%E5%8F%8A%E2%80%9C%E4%B8%8D%E2%80%9D%E7%9A%84%E5%8F%98%E8%B0%83

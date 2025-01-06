@@ -2161,11 +2161,15 @@ const DICT2: { [prop: string]: string } = {
 
 };
 export default DICT2;
-export const Pattern2: Pattern[] = Object.keys(DICT2).map((key) => ({
-  zh: key,
-  pinyin: DICT2[key],
-  probability: Probability.DICT,
-  length: 2,
-  priority: Priority.Normal,
-  dict: Symbol('dict2'),
-}));
+export function fillPattern2(arr: Pattern[]): void {
+  Object.keys(DICT2).forEach((key) => {
+    arr.push({
+      zh: key,
+      pinyin: DICT2[key],
+      probability: Probability.DICT,
+      length: 2,
+      priority: Priority.Normal,
+      dict: Symbol('dict2'),
+    });
+  });
+}

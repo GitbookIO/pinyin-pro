@@ -25,7 +25,7 @@ export declare const SpecialFinalMap: {
     u: string;
 };
 export declare const doubleFinalList: string[];
-export declare const PatternNumberDict: Pattern[];
+export declare function fillPatternNumberDict(arr: Pattern[]): void;
 export declare const toneSandhiList: string[];
 export declare function processToneSandhi(cur: string, pre: string, next: string): string | undefined;
 export declare function processToneSandhiLiao(cur: string, pre: string): "liǎo" | undefined;

@@ -1,9 +1,9 @@
-import { PatternNumberDict } from "@/data/special";
-import { Pattern2 } from "@/data/dict2";
-import { Pattern3 } from "@/data/dict3";
-import { Pattern4 } from "@/data/dict4";
-import { Pattern5 } from "@/data/dict5";
-import { PatternSurname } from "@/data/surname";
+import { fillPatternNumberDict } from "@/data/special";
+import { fillPattern2 } from "@/data/dict2";
+import { fillPattern3 } from "@/data/dict3";
+import { fillPattern4 } from "@/data/dict4";
+import { fillPattern5 } from "@/data/dict5";
+import { fillPatternSurname } from "@/data/surname";
 import { maxProbability } from "./max-probability";
 import { minTokenization } from "./min-tokenization";
 import { reverseMaxMatch } from "./reverse-max-match";
@@ -235,14 +235,13 @@ let acTree: AC | undefined;
 export function getACTree(): AC {
   if (!patternsNormal) {
     // 常规匹配
-    patternsNormal = [
-      ...Pattern5,
-      ...Pattern4,
-      ...Pattern3,
-      ...Pattern2,
-      ...PatternNumberDict,
-      ...PatternSurname,
-    ];
+    patternsNormal = [];
+    fillPattern5(patternsNormal);
+    fillPattern4(patternsNormal);
+    fillPattern3(patternsNormal);
+    fillPattern2(patternsNormal);
+    fillPatternNumberDict(patternsNormal);
+    fillPatternSurname(patternsNormal);
   }
 
   if (!acTree) {
